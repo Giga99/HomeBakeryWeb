@@ -14,7 +14,6 @@ const Notifications = () => {
     useEffect(() => {
         // Retrieve notifications from local storage for the logged-in user
         const userNotificationsString = localStorage.getItem("userNotifications");
-        console.log(userNotificationsString);
         const userNotifications = userNotificationsString
             ? JSON.parse(userNotificationsString)
             : [];

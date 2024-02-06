@@ -288,7 +288,6 @@ const Settings = () => {
                                                     );
 
                                                     // Handle any additional logic, such as displaying a success message or redirecting to another page
-                                                    console.log("Password updated successfully!");
                                                     setUpdateSuccess(true);
                                                     setTimeout(() => {
                                                         setUpdateSuccess(false);
@@ -300,7 +299,6 @@ const Settings = () => {
                                                     }, 1000);
                                                 } else {
                                                     // Handle incorrect current password
-                                                    console.log("Incorrect current password");
                                                     setPasswordUpdateFailed(true);
                                                 }
                                             } else {

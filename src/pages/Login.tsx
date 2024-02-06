@@ -52,7 +52,6 @@ const Login = () => {
                             const existingLogins = existingLoginsJSON
                                 ? JSON.parse(existingLoginsJSON)
                                 : [];
-                            console.log(existingLogins);
                             // Check if the submitted credentials match any stored login
                             const matchedLogin = existingLogins.find(
                                 (login: FormValues) =>

@@ -8,12 +8,10 @@ import CartItem from "../model/CartItem.ts";
 
 const CakeDetails = () => {
     const {cakeURL} = useParams<{ cakeURL: string }>();
-    const [selectedCake, setSelectedCake] = useState<CakeModel | undefined>();
+    const [selectedCake] = useState<CakeModel>(getCakeDetails());
     const [isPopupVisible, setPopupVisible] = useState(false);
 
-    const [userInfo, setUserInfo] = useState({
-        username: "",
-    });
+    const [userInfo, setUserInfo] = useState({username: ""});
 
     // comments
     const [comment, setComment] = useState<string>("");
@@ -47,19 +45,9 @@ const CakeDetails = () => {
 
     useEffect(
         () => {
-            const cakesJSON = localStorage.getItem("cakes");
-            const cakes = cakesJSON ? JSON.parse(cakesJSON) : [];
-            setSelectedCake(cakes.find((cake: CakeModel) => cake.url === cakeURL));
-        },
-        []
-    );
-
-    useEffect(
-        () => {
             // Calculate and log totalPrice whenever quantity or selectedCake changes
             let newQuantity = quantity * (selectedCake?.price || 0);
             setTotalPrice(parseFloat(newQuantity.toFixed(2)));
-            console.log(totalPrice);
         },
         [quantity]
     );
@@ -292,6 +280,12 @@ const CakeDetails = () => {
             )}
         </main>
     );
+
+    function getCakeDetails(): CakeModel {
+        const cakesJSON = localStorage.getItem("cakes");
+        const cakes = cakesJSON ? JSON.parse(cakesJSON) : [];
+        return cakes.find((cake: CakeModel) => cake.url === cakeURL)
+    }
 };
 
 export default CakeDetails;
