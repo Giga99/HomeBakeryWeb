@@ -26,7 +26,8 @@ interface OrderCardProps {
     order: Order;
     onOrderStatusChange: (
         orderNumber: string,
-        newOrderStatus: OrderStatus
+        newOrderStatus: OrderStatus,
+        user: string,
     ) => void;
 }
 
@@ -45,7 +46,7 @@ const OrderCard = ({order, onOrderStatusChange}: OrderCardProps) => {
     useEffect(() => {
         // Check if orderStatus has changed before calling onOrderStatusChange
         if (orderStatus !== initialOrderStatus) {
-            onOrderStatusChange(orderNumber, orderStatus);
+            onOrderStatusChange(orderNumber, orderStatus, user);
         }
     }, [orderNumber, orderStatus, initialOrderStatus, onOrderStatusChange]);
 

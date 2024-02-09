@@ -34,7 +34,8 @@ const Orders = () => {
 
     const handleOrderStatusChange = (
         orderNumber: string,
-        newOrderStatus: OrderStatus
+        newOrderStatus: OrderStatus,
+        user: string
     ) => {
         // Update the order status in the local state
         setOrders((prevOrders: Order[]) =>
@@ -52,6 +53,17 @@ const Orders = () => {
                 : order
         );
         localStorage.setItem("orders", JSON.stringify(updatedOrders));
+
+        const userNotificationsString = localStorage.getItem("userNotifications");
+        const userNotifications = userNotificationsString
+            ? JSON.parse(userNotificationsString)
+            : [];
+        userNotifications.push({
+            "orderNumber": orderNumber,
+            "status": newOrderStatus,
+            "user": user
+        });
+        localStorage.setItem("userNotifications", userNotifications);
     };
 
     return (
